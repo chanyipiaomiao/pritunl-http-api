@@ -6,11 +6,6 @@ import (
 	"pritunl-http-api/custom/ctype"
 )
 
-var (
-	token     = beego.AppConfig.String("security::token")
-	tokenName = beego.AppConfig.String("security::tokenName")
-)
-
 type BaseController struct {
 	beego.Controller
 }

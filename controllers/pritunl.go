@@ -2,12 +2,19 @@ package controllers
 
 import (
 	"fmt"
+	"github.com/astaxie/beego"
 	"pritunl-http-api/custom/ctype"
 	"pritunl-http-api/models"
 )
 
 const (
 	pritunlEntry = "Pritunl OpenVPN Operation"
+)
+
+var (
+	token          = beego.AppConfig.String("security::token")
+	tokenName      = beego.AppConfig.String("security::tokenName")
+	enableToken, _ = beego.AppConfig.Bool("security::enableToken")
 )
 
 // Pritunl 控制器
@@ -23,13 +30,15 @@ func (p *PritunlController) Prepare() {
 		tokenInGet    string
 	)
 
-	// 获取 头部信息
-	tokenInHeader = p.Ctx.Input.Header(tokenName)
-	if tokenInHeader != token {
-		tokenInGet = p.GetString(tokenName)
-		if tokenInGet == "" {
-			p.JsonError("token auth", "token auth error", "", true)
-			p.Abort("403")
+	if enableToken {
+		// 获取 头部信息
+		tokenInHeader = p.Ctx.Input.Header(tokenName)
+		if tokenInHeader != token {
+			tokenInGet = p.GetString(tokenName)
+			if tokenInGet == "" {
+				p.JsonError("token auth", "token auth error", "", true)
+				p.Abort("403")
+			}
 		}
 	}
 
