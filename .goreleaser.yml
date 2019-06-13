@@ -1,0 +1,31 @@
+release:
+  github:
+    owner: chanyipiaomiao
+    name: pritunl-http-api
+  name_template: '{{.Tag}}'
+  draft: true
+builds:
+  - main: main.go
+    binary: pritunl-http-api
+    goos:
+      - windows
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - 386
+    env:
+      - CGO_ENABLED=0
+archive:
+  format: tar.gz
+  wrap_in_directory: true
+  replacements:
+    amd64: 64-bit
+    darwin: macos
+    linux: linux
+  files:
+    - README.md
+    - conf/*.conf
+  format_overrides:
+    - goos: windows
+      format: zip
