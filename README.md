@@ -6,6 +6,10 @@
 
 由于开源版不提供API调用，故有此项目, 通过模拟登陆的方式实现的一套HTTP API接口
 
+## 安装运行
+
+[下载](https://github.com/chanyipiaomiao/pritunl-http-api/releases)二进制文件即可
+
 ## 配置文件
 
 ```bash
