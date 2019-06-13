@@ -1,3 +1,3 @@
-# wenba-devops-api-center
+# pritunl-http-api
 
-运维操作API中心
+Pritunl OpenVPN HTTP API
