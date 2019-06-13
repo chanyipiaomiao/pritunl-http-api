@@ -70,20 +70,3 @@ func (b *BaseController) JsonError(entryType, errmsg string, data interface{}, i
 func (b *BaseController) JsonOK(entryType string, data interface{}, isLog bool) {
 	b.json(entryType, "", 0, data, isLog)
 }
-
-func (b *BaseController) Prepare() {
-
-	// 获取客户端IP
-	b.Data["RemoteIP"] = b.Ctx.Input.IP()
-
-	// 获取 头部信息
-	tokenInHeader := b.Ctx.Input.Header(tokenName)
-	if tokenInHeader != token {
-		tokenInGet := b.GetString(tokenName)
-		if tokenInGet == "" {
-			b.JsonError("token auth", "token auth error", "", true)
-			b.Abort("403")
-		}
-	}
-
-}

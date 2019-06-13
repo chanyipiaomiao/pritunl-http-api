@@ -396,6 +396,10 @@ func (p *Pritunl) EnableDisableUser(username, status string) (ctype.Data, error)
 
 	length = len(searchUserResult.Users)
 
+	if length == 0 {
+		return nil, fmt.Errorf("not found user: %s", username)
+	}
+
 	if length == 1 {
 		userResult = searchUserResult.Users[0]
 		disableUserUrl = fmt.Sprintf("%s%s/%s/%s", pritunlUrl, userAPI, organization, userResult.ID)

@@ -17,9 +17,21 @@ type PritunlController struct {
 
 func (p *PritunlController) Prepare() {
 	var (
-		vpnName string
-		orgName string
+		vpnName       string
+		orgName       string
+		tokenInHeader string
+		tokenInGet    string
 	)
+
+	// 获取 头部信息
+	tokenInHeader = p.Ctx.Input.Header(tokenName)
+	if tokenInHeader != token {
+		tokenInGet = p.GetString(tokenName)
+		if tokenInGet == "" {
+			p.JsonError("token auth", "token auth error", "", true)
+			p.Abort("403")
+		}
+	}
 
 	vpnName = p.GetString("vpn-name")
 	orgName = p.GetString("org-name")

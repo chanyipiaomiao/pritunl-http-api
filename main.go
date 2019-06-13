@@ -1,4 +1,4 @@
-package pritunl_http_api
+package main
 
 import (
 	_ "pritunl-http-api/routers"
@@ -7,9 +7,5 @@ import (
 )
 
 func main() {
-	if beego.BConfig.RunMode == "dev" {
-		beego.BConfig.WebConfig.DirectoryIndex = true
-		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
-	}
 	beego.Run()
 }
