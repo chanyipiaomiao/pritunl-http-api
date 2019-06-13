@@ -3,7 +3,7 @@ FROM busybox
 WORKDIR /pritunl-http-api
 
 ADD pritunl-http-api .
-ADD conf .
+ADD conf ./conf
 
 EXPOSE 30080
 
