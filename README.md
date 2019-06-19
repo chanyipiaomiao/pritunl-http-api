@@ -181,6 +181,23 @@ PUT /pritunl?vpn-name=VPN名称&org-name=组织名称&username=用户名&status=
 POST /pritunl?vpn-name=VPN名称&org-name=组织名称&username=用户名&multi=yes
 ```
 
+json请求体
+
+请求头: Content-Type  application/json
+
+```bash
+[
+	{
+		"name": "test5555",
+		"email": null
+	},
+	{
+		"name": "test6666",
+		"email": null
+	}
+]
+```
+
 返回
 
 ```bash
