@@ -33,14 +33,15 @@ func (p *PritunlController) Prepare() {
 	if enableToken {
 		// 获取 头部信息
 		tokenInHeader = p.Ctx.Input.Header(tokenName)
-		if tokenInHeader != token {
-			tokenInGet = p.GetString(tokenName)
-			if tokenInGet == "" {
-				p.JsonError("token auth", "token auth error", "", true)
-				p.Abort("403")
-			}
+		if tokenInHeader == "" {
+			p.JsonError("token auth", "token auth error", "", true)
+			p.Abort("403")
+		}else if tokenInHeader != token {
+			p.JsonError("token auth", "invalid token", "", true)
+			p.Abort("403")
 		}
 	}
+
 
 	vpnName = p.GetString("vpn-name")
 	orgName = p.GetString("org-name")
